@@ -1,0 +1,25 @@
+#!/usr/bin/python3
+
+import sys
+from PyQt4 import QtCore, QtGui
+import tournoisGUI
+
+class MainDialog (QtGui.QMainWindow, tournoisGUI.Ui_MainWindow):
+	def __init__(self, parent=None):
+		super(MainDialog, self).__init__(parent)
+		self.setupUi(self)
+
+	def menuClick(self):
+		pass
+
+	def btnNextClick(self):
+		pass
+
+	def lbClick(self):
+		pass
+
+if __name__ == '__main__':
+	app = QtGui.QApplication(sys.argv)
+	form = MainDialog()
+	form.show()
+	app.exec_()
