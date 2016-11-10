@@ -179,10 +179,16 @@ if __name__ == '__main__':
     lbDept.grid(row=5, column=4, sticky=N+S)
     sbDept.grid(row=5, column=4, sticky=N+S+E)
 
-    def validAttendance():  # méthode en attente
-       for x in range(0, len(listeDept)):
+    def selectAll():
+        for x in range(0, len(listeDept)):
             listeDept[x][3].set(1)
-            Checkbar.updateAttendance
+        lbDept.delete(0, END)
+        for x in range(0, len(listeDept)):
+            if listeDept[x][3].get() == 1:
+                lbDept.insert(END, listeDept[x][1]+"-"+listeDept[x][0])
+
+    def validAttendance():  # méthode en attente
+        pass
 
     label_info = Label(
         fen,
@@ -196,6 +202,6 @@ if __name__ == '__main__':
     label_dept = Label(fen, text="Départements").grid(row=3, column=0, rowspan=2)
     case_vide(4, 0)
     Button(fen, text='Quitter', command=fen.quit).grid(row=3, column=3, padx=10, pady=0, sticky=W)
-    Button(fen, text='Valider présences', command=validAttendance).grid(row=3, column=4,  padx=10, pady=0, sticky=W)
+    Button(fen, text='Tout cocher', command=selectAll).grid(row=3, column=4,  padx=10, pady=0, sticky=W)
 
     fen.mainloop()
