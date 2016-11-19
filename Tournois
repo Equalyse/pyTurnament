@@ -23,7 +23,7 @@ class Checkbar(Frame):
                 chkBtn = Checkbutton(
                     self,
                     text=numDept+"-"+nomDept,
-                    command=self.updateAttendance,
+                    command=updateAttendance,
                     variable=listeDept[k][3],
                     fg="blue",
                     activebackground="red")
@@ -34,12 +34,12 @@ class Checkbar(Frame):
             j = 0
             col += 1
 
-    def updateAttendance(self):
-        # met à jour la listBox des départements présents
-        lbDept.delete(0, END)
-        for x in range(0, len(listeDept)):
-            if listeDept[x][3].get() == 1:
-                lbDept.insert(END, listeDept[x][1]+"-"+listeDept[x][0])
+def updateAttendance():
+	# met à jour la listBox des départements présents
+	lbDept.delete(0, END)
+	for x in range(0, len(listeDept)):
+		if listeDept[x][3].get() == 1:
+			lbDept.insert(END, listeDept[x][1]+"-"+listeDept[x][0])
 
 
 def case_vide(ligne, colonne):
@@ -179,10 +179,19 @@ if __name__ == '__main__':
     lbDept.grid(row=5, column=4, sticky=N+S)
     sbDept.grid(row=5, column=4, sticky=N+S+E)
 
-    def validAttendance():  # méthode en attente
-       for x in range(0, len(listeDept)):
+    def setAttendance():  # méthode en attente
+        for x in range(0, len(listeDept)):
             listeDept[x][3].set(1)
-            Checkbar.updateAttendance
+        btnSetAll.config(text='Tout décocher')
+        btnSetAll.config(command=unSetAttendance)
+        updateAttendance
+
+    def unSetAttendance():  # méthode en attente
+        for x in range(0, len(listeDept)):
+            listeDept[x][3].set(0)
+        btnSetAll.config(text='Tout cocher')
+        btnSetAll.config(command=setAttendance)
+        updateAttendance
 
     label_info = Label(
         fen,
@@ -196,6 +205,7 @@ if __name__ == '__main__':
     label_dept = Label(fen, text="Départements").grid(row=3, column=0, rowspan=2)
     case_vide(4, 0)
     Button(fen, text='Quitter', command=fen.quit).grid(row=3, column=3, padx=10, pady=0, sticky=W)
-    Button(fen, text='Valider présences', command=validAttendance).grid(row=3, column=4,  padx=10, pady=0, sticky=W)
+    btnSetAll = Button(fen, text='Tout cocher', command=setAttendance)
+    btnSetAll.grid(row=3, column=4,  padx=10, pady=0, sticky=W)
 
     fen.mainloop()
