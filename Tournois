@@ -92,6 +92,7 @@ if __name__ == '__main__':
     lbDept.grid(row=5, column=3, sticky=N+S)
     sbDept.grid(row=5, column=3, sticky=N+S+E)
 
+<<<<<<< HEAD
     def setAttendance():  # selectionne tous les départements
         for x in range(0, len(listeDept)):
             listeDept[x][3].set(1)
@@ -105,6 +106,18 @@ if __name__ == '__main__':
         btnSetAll.config(text='Tout cocher')
         btnSetAll.config(command=setAttendance)
         updateAttendance()
+=======
+    def selectAll():
+        for x in range(0, len(listeDept)):
+            listeDept[x][3].set(1)
+        lbDept.delete(0, END)
+        for x in range(0, len(listeDept)):
+            if listeDept[x][3].get() == 1:
+                lbDept.insert(END, listeDept[x][1]+"-"+listeDept[x][0])
+
+    def validAttendance():  # méthode en attente
+        pass
+>>>>>>> 28b8104263e910127cedf27687acb898d60bf578
 
     label_info = Label(
         fen,
@@ -117,9 +130,14 @@ if __name__ == '__main__':
 
     label_dept = Label(fen, text="Départements").grid(row=3, column=0, rowspan=2)
     case_vide(4, 0)
+<<<<<<< HEAD
     btnQuit = Button(fen, text='Quitter', command=fen.quit)
     btnQuit.grid(row=3, column=4, padx=10, pady=0, sticky=W)
     btnSetAll = Button(fen, text='Tout cocher', command=setAttendance)
     btnSetAll.grid(row=3, column=3,  padx=10, pady=0, sticky=W)
+=======
+    Button(fen, text='Quitter', command=fen.quit).grid(row=3, column=3, padx=10, pady=0, sticky=W)
+    Button(fen, text='Tout cocher', command=selectAll).grid(row=3, column=4,  padx=10, pady=0, sticky=W)
+>>>>>>> 28b8104263e910127cedf27687acb898d60bf578
 
     fen.mainloop()
