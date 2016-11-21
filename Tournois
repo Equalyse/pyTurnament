@@ -2,6 +2,7 @@
 
 from tkinter import *
 from tkinter import ttk
+import csv
 
 
 class Checkbar(Frame):
@@ -34,116 +35,28 @@ class Checkbar(Frame):
             j = 0
             col += 1
 
+
 def updateAttendance():
-	# met à jour la listBox des départements présents
-	lbDept.delete(0, END)
-	for x in range(0, len(listeDept)):
-		if listeDept[x][3].get() == 1:
-			lbDept.insert(END, listeDept[x][1]+"-"+listeDept[x][0])
+    # met à jour la listBox des départements présents
+    lbDept.delete(0, END)
+    for x in range(0, len(listeDept)):
+        if listeDept[x][3].get() == 1:
+            lbDept.insert(END, listeDept[x][1]+"-"+listeDept[x][0])
 
 
 def case_vide(ligne, colonne):
     label = Label(fen, text="").grid(row=ligne, column=colonne)
 
-# listeDept est la liste des departements avec le numéro et la région
+
+def importDept():
+    fileDept = csv.reader(open('Departements.csv', 'r'))
+    # listeDept est la liste des departements avec le numéro et la région
+    for row in fileDept:
+        listeDept.append([row[0], row[1], row[2], row[3]])
 
 listeDept = []
-listeDept.append(['Ain', '01', 'Rhône-Alpes', 0])
-listeDept.append(['Aisne', '02', 'Picardie', 0])
-listeDept.append(['Allier', '03', 'Auvergne', 0])
-listeDept.append(['Alpes de Hautes-Provence', '04', 'Provence-Alpes-Côte d Azur', 0])
-listeDept.append(['Hautes-Alpes', '05', 'Provence-Alpes-Côte d Azur', 0])
-listeDept.append(['Alpes-Maritimes', '06', 'Provence-Alpes-Côte d Azur', 0])
-listeDept.append(['Ardèche', '07', 'Rhône-Alpes', 0])
-listeDept.append(['Ardennes', '08', 'Champagne-Ardenne', 0])
-listeDept.append(['Ariège', '09', 'Midi-Pyrénées', 0])
-listeDept.append(['Aube', '10', 'Champagne-Ardenne', 0])
-listeDept.append(['Aude', '11', 'Languedoc-Roussillon', 0])
-listeDept.append(['Aveyron', '12', 'Midi-Pyrénées', 0])
-listeDept.append(['Bouches-du-Rhône', '13', 'Provence-Alpes-Côte d Azur', 0])
-listeDept.append(['Calvados', '14', 'Basse-Normandie', 0])
-listeDept.append(['Cantal', '15', 'Auvergne', 0])
-listeDept.append(['Charente', '16', 'Poitou-Charentes', 0])
-listeDept.append(['Charente-Maritime', '17', 'Poitou-Charentes', 0])
-listeDept.append(['Cher', '18', 'Centre', 0])
-listeDept.append(['Corrèze', '19', 'Limousin', 0])
-listeDept.append(['Corse-du-Sud', '2A', 'Corse', 0])
-listeDept.append(['Haute-Corse', '2B', 'Corse', 0])
-listeDept.append(['Côte-d Or', '21', 'Bourgogne', 0])
-listeDept.append(['Côtes d Armor', '22', 'Bretagne', 0])
-listeDept.append(['Creuse', '23', 'Limousin', 0])
-listeDept.append(['Dordogne', '24', 'Aquitaine', 0])
-listeDept.append(['Doubs', '25', 'Franche-Comté', 0])
-listeDept.append(['Drôme', '26', 'Rhône-Alpes', 0])
-listeDept.append(['Eure', '27', 'Haute-Normandie', 0])
-listeDept.append(['Eure-et-Loir', '28', 'Centre', 0])
-listeDept.append(['Finistère', '29', 'Bretagne', 0])
-listeDept.append(['Gard', '30', 'Languedoc-Roussillon', 0])
-listeDept.append(['Haute-Garonne', '31', 'Midi-Pyrénées', 0])
-listeDept.append(['Gers', '32', 'Midi-Pyrénées', 0])
-listeDept.append(['Gironde', '33', 'Aquitaine', 0])
-listeDept.append(['Hérault', '34', 'Languedoc-Roussillon', 0])
-listeDept.append(['Ille-et-Vilaine', '35', 'Bretagne', 0])
-listeDept.append(['Indre', '36', 'Centre', 0])
-listeDept.append(['Indre-et-Loire', '37', 'Centre', 0])
-listeDept.append(['Isère', '38', 'Rhône-Alpes', 0])
-listeDept.append(['Jura', '39', 'Franche-Comté', 0])
-listeDept.append(['Landes', '40', 'Aquitaine', 0])
-listeDept.append(['Loir-et-Cher', '41', 'Centre', 0])
-listeDept.append(['Loire', '42', 'Rhône-Alpes', 0])
-listeDept.append(['Haute-Loire', '43', 'Auvergne', 0])
-listeDept.append(['Loire-Atlantique', '44', 'Pays de la Loire', 0])
-listeDept.append(['Loiret', '45', 'Centre', 0])
-listeDept.append(['Lot', '46', 'Midi-Pyrénées', 0])
-listeDept.append(['Lot-et-Garonne', '47', 'Aquitaine', 0])
-listeDept.append(['Lozère', '48', 'Languedoc-Roussillon', 0])
-listeDept.append(['Maine-et-Loire', '49', 'Pays de la Loire', 0])
-listeDept.append(['Manche', '50', 'Basse-Normandie', 0])
-listeDept.append(['Marne', '51', 'Champagne-Ardenne', 0])
-listeDept.append(['Haute-Marne', '52', 'Champagne-Ardenne', 0])
-listeDept.append(['Mayenne', '53', 'Pays de la Loire', 0])
-listeDept.append(['Meurthe-et-Moselle', '54', 'Lorraine', 0])
-listeDept.append(['Meuse', '55', 'Lorraine', 0])
-listeDept.append(['Morbihan', '56', 'Bretagne', 0])
-listeDept.append(['Moselle', '57', 'Lorraine', 0])
-listeDept.append(['Nièvre', '58', 'Bourgogne', 0])
-listeDept.append(['Nord', '59', 'Nord-Pas-de-Calais', 0])
-listeDept.append(['Oise', '60', 'Picardie', 0])
-listeDept.append(['Orne', '61', 'Basse-Normandie', 0])
-listeDept.append(['Pas-de-Calais', '62', 'Nord-Pas-de-Calais', 0])
-listeDept.append(['Puy-de-Dôme', '63', 'Auvergne', 0])
-listeDept.append(['Pyrénées-Atlantiques', '64', 'Aquitaine', 0])
-listeDept.append(['Hautes-Pyrénées', '65', 'Midi-Pyrénées', 0])
-listeDept.append(['Pyrénées-Orientales', '66', 'Languedoc-Roussillon', 0])
-listeDept.append(['Bas-Rhin', '67', 'Alsace', 0])
-listeDept.append(['Haut-Rhin', '68', 'Alsace', 0])
-listeDept.append(['Rhône', '69', 'Rhône-Alpes', 0])
-listeDept.append(['Haute-Saône', '70', 'Franche-Comté', 0])
-listeDept.append(['Saône-et-Loire', '71', 'Bourgogne', 0])
-listeDept.append(['Sarthe', '72', 'Pays de la Loire', 0])
-listeDept.append(['Savoie', '73', 'Rhône-Alpes', 0])
-listeDept.append(['Haute-Savoie', '74', 'Rhône-Alpes', 0])
-listeDept.append(['Paris', '75', 'Ile-de-France', 0])
-listeDept.append(['Seine-Maritime', '76', 'Haute-Normandie', 0])
-listeDept.append(['Seine-et-Marne', '77', 'Ile-de-France', 0])
-listeDept.append(['Yvelines', '78', 'Ile-de-France', 0])
-listeDept.append(['Deux-Sèvres', '79', 'Poitou-Charentes', 0])
-listeDept.append(['Somme', '80', 'Picardie', 0])
-listeDept.append(['Tarn', '81', 'Midi-Pyrénées', 0])
-listeDept.append(['Tarn-et-Garonne', '82', 'Midi-Pyrénées', 0])
-listeDept.append(['Var', '83', 'Provence-Alpes-Côte d Azur', 0])
-listeDept.append(['Vaucluse', '84', 'Provence-Alpes-Côte d Azur', 0])
-listeDept.append(['Vendée', '85', 'Pays de la Loire', 0])
-listeDept.append(['Vienne', '86', 'Poitou-Charentes', 0])
-listeDept.append(['Haute-Vienne', '87', 'Limousin', 0])
-listeDept.append(['Vosges', '88', 'Lorraine', 0])
-listeDept.append(['Yonne', '89', 'Bourgogne', 0])
-listeDept.append(['Territoire-de-Belfort', '90', 'Franche-Comté', 0])
-listeDept.append(['Essonne', '91', 'Ile-de-France', 0])
-listeDept.append(['Hauts-de-Seine', '92', 'Ile-de-France', 0])
-listeDept.append(['Seine-Saint-Denis', '93', 'Ile-de-France', 0])
-listeDept.append(['Val-de-Marne', '94', 'Ile-de-France', 0])
-listeDept.append(['Val-d Oise', '95', 'Ile-de-France', 0])
+
+importDept()
 
 nb = len(listeDept)     # comptage du nb de departement
 nbCol = 5               # nombre de colonne pour affichage
@@ -176,22 +89,22 @@ if __name__ == '__main__':
     sbDept = Scrollbar(fen, orient=VERTICAL)
     sbDept.config(command=lbDept.yview)
     lbDept.config(yscrollcommand=sbDept.set)
-    lbDept.grid(row=5, column=4, sticky=N+S)
-    sbDept.grid(row=5, column=4, sticky=N+S+E)
+    lbDept.grid(row=5, column=3, sticky=N+S)
+    sbDept.grid(row=5, column=3, sticky=N+S+E)
 
-    def setAttendance():  # méthode en attente
+    def setAttendance():  # selectionne tous les départements
         for x in range(0, len(listeDept)):
             listeDept[x][3].set(1)
         btnSetAll.config(text='Tout décocher')
         btnSetAll.config(command=unSetAttendance)
-        updateAttendance
+        updateAttendance()
 
-    def unSetAttendance():  # méthode en attente
+    def unSetAttendance():  # déselectionne les départements
         for x in range(0, len(listeDept)):
             listeDept[x][3].set(0)
         btnSetAll.config(text='Tout cocher')
         btnSetAll.config(command=setAttendance)
-        updateAttendance
+        updateAttendance()
 
     label_info = Label(
         fen,
@@ -204,8 +117,9 @@ if __name__ == '__main__':
 
     label_dept = Label(fen, text="Départements").grid(row=3, column=0, rowspan=2)
     case_vide(4, 0)
-    Button(fen, text='Quitter', command=fen.quit).grid(row=3, column=3, padx=10, pady=0, sticky=W)
+    btnQuit = Button(fen, text='Quitter', command=fen.quit)
+    btnQuit.grid(row=3, column=4, padx=10, pady=0, sticky=W)
     btnSetAll = Button(fen, text='Tout cocher', command=setAttendance)
-    btnSetAll.grid(row=3, column=4,  padx=10, pady=0, sticky=W)
+    btnSetAll.grid(row=3, column=3,  padx=10, pady=0, sticky=W)
 
     fen.mainloop()
